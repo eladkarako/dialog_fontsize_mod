@@ -1,12 +1,31 @@
 @echo off
+
+
+::well defined home-folder (to avoid a mix-up when running the script from another folder, this essentially workaround "working folder" changes CMD quirk when running from another location... :/ ).
+set CURRENT_PATH=%~dp0
+
+
+::tools to use
+set EXE_RESHACKER="%CURRENT_PATH%reshacker\reshacker.exe"
+set EXE_REPLACER="%CURRENT_PATH%replacer\index.cmd"
+set EXE_RC="%CURRENT_PATH%rc\x64\RC.Exe"
+
+
+::overkill - convery tool's path to absolute and short (8.3 old dos format) to make things less buggy. also removes " wrapping (not needed now)
+for /f %%a in ("%EXE_RESHACKER%")do (set "EXE_RESHACKER=%%~fsa"  )
+for /f %%a in ("%EXE_REPLACER%")do  (set "EXE_REPLACER=%%~fsa"   )
+for /f %%a in ("%EXE_RC%")do        (set "EXE_RC=%%~fsa"         )
+
+
+::input file name will be used to generate temporary RC, RES files and the final modified one with "_MOD" suffix. here the "overkill" is not needed, the input file format has similar/same way of working...
 set FILE_INPUT="%~s1"
-set FILE_OUTPUT="%~d1%~p1%~n1_MOD%~x1"
 set FILE_RC="%~d1%~p1%~n1_DIALOGs.rc"
 set FILE_TEMP="%~d1%~p1%~n1_TEMP.rc"
 set FILE_RES="%~d1%~p1%~n1_DIALOGs.res"
+set FILE_OUTPUT="%~d1%~p1%~n1_MOD%~x1"
 
 
-::OPTIONAL - apply following fix. it will make sure path always absolute (full) from possibly a relative one.
+::overkill - OPTIONAL - apply following fix. it will make sure path always absolute (full) from possibly a relative one.
 ::for /f %%a in ("%FILE_INPUT%")do (set "FILE_INPUT=%%~fsa"  )
 
 
@@ -16,15 +35,15 @@ if not exist "%~s1"        goto NOFILEIN
 if not exist %FILE_INPUT%  goto NOFILEIN
 
 
-::cleanup (although not needed).
-del /f /q %FILE_OUTPUT%   2>nul >nul
-del /f /q %FILE_TEMP%     2>nul >nul
-del /f /q %FILE_RC%       2>nul >nul
-del /f /q %FILE_RES%      2>nul >nul
+::cleanup (although not really needed, since everything will overwrite if needed...).
+del /f /q %FILE_OUTPUT%    2>nul >nul
+del /f /q %FILE_TEMP%      2>nul >nul
+del /f /q %FILE_RC%        2>nul >nul
+del /f /q %FILE_RES%       2>nul >nul
 
 
 ::extract .rc of all DIALOG resources into one file (text).
-call reshacker\reshacker.exe -extract "%FILE_INPUT%,%FILE_TEMP%,DIALOG,,"
+call %EXE_RESHACKER% -extract "%FILE_INPUT%,%FILE_TEMP%,DIALOG,,"
 echo DEBUG:  extracting DIALOG-resources in RC ^(text^) mode.
 if not exist %FILE_TEMP%  goto NORCTEMP
 echo done.
@@ -33,8 +52,8 @@ echo.
 
 ::search-replace file-content using nodejs (base64 of regex) - first is \" to '  second is FONT 8, to FONT 12
 echo DEBUG:  search-replace the text in the RC file, fixing stuff ^(uses NodeJS^).
-call replacer\index.cmd %FILE_TEMP% "L1xcIi9n"         "Jw=="
-call replacer\index.cmd %FILE_TEMP% "L0ZPTlQgOCwvZw==" "Rk9OVCAxMiw="
+call %EXE_REPLACER% %FILE_TEMP% "L1xcIi9n"         "Jw=="
+call %EXE_REPLACER% %FILE_TEMP% "L0ZPTlQgOCwvZw==" "Rk9OVCAxMiw="
 echo done.
 echo.
 
@@ -50,7 +69,7 @@ echo.
 
 ::compile filename.rc to filename.res (on errors add missing define lines to defines.rc)
 echo DEBUG:  compile RC to RES ^(using Microsoft Resource Compiler - rc.exe^).
-call rc\x64\RC.Exe %FILE_RC%  2>nul >nul
+call %EXE_RC% %FILE_RC%  2>nul >nul
 if not exist %FILE_RES%  goto NORES
 echo done.
 echo.
@@ -58,7 +77,7 @@ echo.
 
 ::modify
 echo DEBUG:  modify DIALOG-resources in %FILE_INPUT% ^(using reshacker.exe^).
-call reshacker\reshacker.exe -modify "%FILE_INPUT%,%FILE_OUTPUT%,%FILE_RES%,DIALOG,,"
+call %EXE_RESHACKER% -modify "%FILE_INPUT%,%FILE_OUTPUT%,%FILE_RES%,DIALOG,,"
 if not exist %FILE_OUTPUT%  goto NOFILEOUT
 echo done.
 echo.
@@ -74,16 +93,19 @@ echo.
 
 goto EXIT
 
+
 ::--------------------------------------------------------------
 :NOFILEIN
   echo.
   echo Error:   Missing path to file ^(ie: "C:\mypath\myfile.exe"^)
   goto EXIT
 
+
 :NORCTEMP
   echo.
   echo Error:   reshacker.exe seems to failed to extract RC resource file from %FILE_INPUT%.
   goto EXIT
+
 
 :NORES
   echo.
@@ -91,14 +113,17 @@ goto EXIT
   echo          add more define-lines to defines.rc ^(look in WinUser.h, WinNT.h, WinGDI.h, WinDef.h or CommCtrl.h^).
   goto EXIT
 
+
 :NOFILEOUT
   echo.
   echo Error:   reshacker.exe seems to failed to modify %FILE_INPUT%, since there was no %FILE_OUTPUT% generated.
   echo          look under reshacker folder for the log-file, it might help...
   goto EXIT
 
+
 :EXIT
   echo.
   echo ^(Press any key to quit...^)
   echo.
   pause 2>nul >nul
+
