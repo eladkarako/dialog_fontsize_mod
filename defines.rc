@@ -1,0 +1,116 @@
+/*
+D:\vs05sdk\%ProgramFilesDir%\Microsoft SDKs\Windows\v7.1\Include\
+search for h files with text: '#define WS_MAXIMIZEBOX  ' (for example)
+WinUser.h
+WinNT.h
+WinGDI.h
+WinDef.h
+CommCtrl.h
+*/
+#define WS_MAXIMIZEBOX          0x00010000L
+#define WS_MINIMIZEBOX          0x00020000L
+#define WS_CLIPCHILDREN         0x02000000L
+#define WS_CAPTION              0x00C00000L
+#define WS_SYSMENU              0x00080000L
+#define WS_THICKFRAME           0x00040000L
+#define WS_EX_APPWINDOW         0x00040000L
+#define LANG_ENGLISH            0x09
+#define SUBLANG_ENGLISH_UK      0x02
+#define FW_NORMAL               400
+#define SS_LEFT                 0x00000000L
+#define SS_NOTIFY               0x00000100L
+#define WS_CHILD                0x40000000L
+#define WS_VISIBLE              0x10000000L
+#define WS_GROUP                0x00020000L
+#define BS_PUSHBUTTON           0x00000000L
+#define BS_ICON                 0x00000040L
+#define BS_LEFT                 0x00000100L
+#define BS_CENTER               0x00000300L
+#define BS_BOTTOM               0x00000800L
+#define BS_VCENTER              0x00000C00L
+#define BS_PUSHLIKE             0x00001000L
+#define BS_MULTILINE            0x00002000L
+#define BS_FLAT                 0x00008000L
+#define FALSE                   0
+#define TRUE                    1
+#define WS_TABSTOP              0x00010000L
+#define SBS_HORZ                0x0000L
+#define SS_BLACKFRAME           0x00000007L
+#define DS_FIXEDSYS             0x0008L
+#define DS_MODALFRAME           0x80L
+#define WS_POPUP                0x80000000L
+#define LVS_REPORT              0x0001
+#define LVS_OWNERDRAWFIXED      0x0400
+#define LVS_ALIGNLEFT           0x0800
+#define LVS_NOCOLUMNHEADER      0x4000
+#define BS_DEFPUSHBUTTON        0x00000001L
+#define DS_NOFAILCREATE         0x0010L
+#define DS_CONTROL              0x0400L
+#define WS_EX_CONTROLPARENT     0x00010000L
+#define WS_HSCROLL              0x00100000L
+#define TCS_TABS                0x0000
+#define TCS_OWNERDRAWFIXED      0x2000
+#define ES_LEFT                 0x0000L
+#define ES_MULTILINE            0x0004L
+#define ES_READONLY             0x0800L
+#define ES_WANTRETURN           0x1000L
+#define WS_DISABLED             0x08000000L
+#define PBS_SMOOTH              0x01
+#define LVS_SORTASCENDING       0x0010
+#define LVS_OWNERDATA           0x1000
+#define LVS_SINGLESEL           0x0004
+#define ES_AUTOHSCROLL          0x0080L
+#define BS_AUTOCHECKBOX         0x00000003L
+#define CBS_DROPDOWNLIST        0x0003L
+#define CBS_OWNERDRAWFIXED      0x0010L
+#define CBS_SORT                0x0100L
+#define CBS_HASSTRINGS          0x0200L
+#define WS_VSCROLL              0x00200000L
+#define BS_AUTORADIOBUTTON      0x00000009L
+#define LVS_NOLABELWRAP         0x0080
+#define WS_BORDER               0x00800000L
+#define LBS_NOTIFY              0x0001L
+#define LBS_OWNERDRAWFIXED      0x0010L
+#define LBS_USETABSTOPS         0x0080L
+#define LBS_NOINTEGRALHEIGHT    0x0100L
+#define LBS_EXTENDEDSEL         0x0800L
+#define LBS_NODATA              0x2000L
+#define SS_CENTERIMAGE          0x00000200L
+#define LBS_WANTKEYBOARDINPUT   0x0400L
+#define SS_BITMAP               0x0000000EL
+#define SS_REALSIZEIMAGE        0x00000800L
+#define ES_NOHIDESEL            0x0100L
+#define SS_NOPREFIX             0x00000080L
+#define SS_CENTER               0x00000001L
+#define WS_CLIPSIBLINGS         0x04000000L
+#define LBS_STANDARD            0x00A00003L
+#define LBS_HASSTRINGS          0x0040L
+#define LVS_SORTDESCENDING      0x0020
+#define CBS_DROPDOWN            0x0002L
+#define CBS_AUTOHSCROLL         0x0040L
+#define LVS_NOSCROLL            0x2000
+#define BS_GROUPBOX             0x00000007L
+#define BS_NOTIFY               0x00004000L
+#define ES_NUMBER               0x2000L
+#define SS_ICON                 0x00000003L
+#define UDS_ALIGNRIGHT          0x0004
+#define UDS_AUTOBUDDY           0x0010
+#define UDS_ARROWKEYS           0x0020
+#define LVS_SHOWSELALWAYS       0x0008
+#define LVS_NOSORTHEADER        0x8000
+#define SS_PATHELLIPSIS         0x00008000L
+#define DTS_SHORTDATEFORMAT     0x0000
+#define DTS_UPDOWN              0x0001
+#define DTS_TIMEFORMAT          0x0009
+#define DTS_RIGHTALIGN          0x0020
+#define SS_WORDELLIPSIS         0x0000C000L
+#define WS_EX_NOACTIVATE        0x08000000L
+#define WS_EX_TRANSPARENT       0x00000020L
+#define ES_CENTER               0x0001L
+#define ES_UPPERCASE            0x0008L
+#define SS_RIGHT                0x00000002L
+#define CBS_OWNERDRAWVARIABLE   0x0020L
+
+/*--------------------------------------------------------------*/
+
+
