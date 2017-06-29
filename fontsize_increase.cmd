@@ -1,15 +1,19 @@
 @echo off
-set FILE_INPUT  ="%~s1"
-set FILE_OUTPUT ="%~d1%~p1%~n1_MOD%~x1"
+set FILE_INPUT="%~s1"
+set FILE_OUTPUT="%~d1%~p1%~n1_MOD%~x1"
+set FILE_RC="%~d1%~p1%~n1_DIALOGs.rc"
+set FILE_TEMP="%~d1%~p1%~n1_TEMP.rc"
+set FILE_RES="%~d1%~p1%~n1_DIALOGs.res"
 
-set FILE_RC     ="%~d1%~p1%~n1_DIALOGs.rc"
-set FILE_TEMP   ="%~d1%~p1%~n1_TEMP.rc"
-set FILE_RES    ="%~d1%~p1%~n1_DIALOGs.res"
+
+::OPTIONAL - apply following fix. it will make sure path always absolute (full) from possibly a relative one.
+::for /f %%a in ("%FILE_INPUT%")do (set "FILE_INPUT=%%~fsa"  )
 
 
 ::verify existing target.
-if ["%~s1" == ""]    goto NOFILEIN;
-if not exist "%~s1"  goto NOFILEIN;
+if ["%~s1" == ""]          goto NOFILEIN
+if not exist "%~s1"        goto NOFILEIN
+if not exist %FILE_INPUT%  goto NOFILEIN
 
 
 ::cleanup (although not needed).
