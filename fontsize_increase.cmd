@@ -1,11 +1,22 @@
 @echo off
 
-:: this may help you:
-:: https://github.com/eladkarako/dialog_fontsize_mod
-:: https://github.com/eladkarako/reshacker
-:: https://github.com/eladkarako/rc
-:: https://github.com/eladkarako/Windows-SDK-7.1
-:: https://github.com/eladkarako/replacer
+
+::--------------------------------------------------------------
+:: NOTES:
+::    this may help you:
+::      https://github.com/eladkarako/dialog_fontsize_mod
+::      https://github.com/eladkarako/reshacker
+::      https://github.com/eladkarako/rc
+::      https://github.com/eladkarako/Windows-SDK-7.1
+::      https://github.com/eladkarako/replacer
+::
+::    using BASE64:
+::      L1xcIi9n            is    /\\"/g
+::      Jw==                is    '
+::      L0ZPTlQgOCwvZw==    is    /FONT 8,/g
+::      Rk9OVCAxMiw=        is    FONT 12,
+::--------------------------------------------------------------
+
 
 echo.
 echo ----------------------------------------------------------
@@ -102,10 +113,10 @@ echo done.
 echo.
 
 
-::search-replace file-content using nodejs (base64 of regex) - first is \" to '  second is 'FONT 8,' to 'FONT 14,'
+::search-replace file-content using nodejs (base64 of regex)
 echo DEBUG:  search-replace the text in the RC file, fixing stuff ^(uses NodeJS^).
 call %TOOL_REPLACER% %FILE_TEMP% "L1xcIi9n"         "Jw=="
-call %TOOL_REPLACER% %FILE_TEMP% "L0ZPTlQgOCwvZw==" "Rk9OVCAxNCw="
+call %TOOL_REPLACER% %FILE_TEMP% "L0ZPTlQgOCwvZw==" "Rk9OVCAxMiw="
 echo done.
 echo.
 
@@ -153,6 +164,8 @@ goto EXIT
 
 
 ::--------------------------------------------------------------
+
+
 :NOTOOL_RESHACKER
   echo.
   echo Error:   reshacker.exe is missing.
