@@ -12,7 +12,7 @@ echo ----------------------------------------------------------
 echo -  font_size_increase
 echo -  You can drag and drop binary files ^(exe, dll,...^) over,
 echo -  and it will automaticly modify the DIALOG resources,
-echo -  increasing the font-size from 8pt to 12pt,
+echo -  increasing the font-size from 8pt to 14pt,
 echo -  it will then create a modified version of your file.
 echo -  
 echo -  It started as a way of increasing the size
@@ -102,10 +102,10 @@ echo done.
 echo.
 
 
-::search-replace file-content using nodejs (base64 of regex) - first is \" to '  second is FONT 8, to FONT 12
+::search-replace file-content using nodejs (base64 of regex) - first is \" to '  second is 'FONT 8,' to 'FONT 14,'
 echo DEBUG:  search-replace the text in the RC file, fixing stuff ^(uses NodeJS^).
 call %TOOL_REPLACER% %FILE_TEMP% "L1xcIi9n"         "Jw=="
-call %TOOL_REPLACER% %FILE_TEMP% "L0ZPTlQgOCwvZw==" "Rk9OVCAxMiw="
+call %TOOL_REPLACER% %FILE_TEMP% "L0ZPTlQgOCwvZw==" "Rk9OVCAxNCw="
 echo done.
 echo.
 
