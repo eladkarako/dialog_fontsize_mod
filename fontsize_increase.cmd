@@ -211,7 +211,4 @@ goto EXIT
 
 :EXIT
   echo.
-  echo ^(Press any key to quit...^)
-  echo.
-  pause 
 
