@@ -1,5 +1,45 @@
 @echo off
 
+:: this may help you:
+:: https://github.com/eladkarako/dialog_fontsize_mod
+:: https://github.com/eladkarako/reshacker
+:: https://github.com/eladkarako/rc
+:: https://github.com/eladkarako/Windows-SDK-7.1
+:: https://github.com/eladkarako/replacer
+
+echo.
+echo ----------------------------------------------------------
+echo -  font_size_increase
+echo -  You can drag and drop binary files ^(exe, dll,...^) over,
+echo -  and it will automaticly modify the DIALOG resources,
+echo -  increasing the font-size from 8pt to 12pt,
+echo -  it will then create a modified version of your file.
+echo -  
+echo -  It started as a way of increasing the size
+echo -  of CCleaner's UI, to look nicely on high DPI-screens.
+echo -  
+echo -  Using reshacker, MS resource-compiler ^(from WinSDK 7.1^)
+echo -  a nodejs program I've made to handle regexp search-replace
+echo -  and a collection of symbols definitions I've collected from
+echo -  WinUser.h, WinNT.h, WinGDI.h, WinDef.h
+echo -  and CommCtrl.h ^(from WinSDK 7.1^)
+echo -  
+echo -  If you find yourself having problems using rc.exe
+echo -  and you see symbol not found error, download github.com/eladkarako/Windows-SDK-7.1/
+echo -  and use Locate32 (for example) too look for text inside of the .h files,
+echo -  looking for the definitions missing, add it to the defines.rc .
+echo -  
+echo -  There are no dependencies or downloads required,
+echo -  everything is supplied ^(yes even exe files...^)
+echo -  
+echo -  You probably want to "unblock" and check ON the 
+echo -  compatibility "run as admin" for each of the exe files.
+echo -  
+echo -                       Enjoy!
+echo -                       EladKarako. June 2017.
+echo -------------------------------------------------------
+echo.
+
 
 ::well defined home-folder (to avoid a mix-up when running the script from another folder, this essentially workaround "working folder" changes CMD quirk when running from another location... :/ ).
 set CURRENT_PATH=%~dp0
@@ -100,7 +140,7 @@ echo.
 
 echo -------------------------------------------------------
 echo -  ALL DONE.
-echo -  (feel free to delete the .rc and .res files)
+echo -  ^(feel free to delete the .rc and .res files^)
 echo -  Your modify file:
 echo -  %FILE_OUTPUT%
 echo -                       Enjoy!
