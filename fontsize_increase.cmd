@@ -41,10 +41,10 @@ if not exist %FILE_INPUT%  goto NOFILEIN
 
 
 ::cleanup (although not really needed, since everything will overwrite if needed...).
-del /f /q %FILE_OUTPUT%    2>nul >nul
-del /f /q %FILE_TEMP%      2>nul >nul
-del /f /q %FILE_RC%        2>nul >nul
-del /f /q %FILE_RES%       2>nul >nul
+del /f /q %FILE_OUTPUT%    
+del /f /q %FILE_TEMP%      
+del /f /q %FILE_RC%        
+del /f /q %FILE_RES%       
 
 
 ::extract .rc of all DIALOG resources into one file (text).
@@ -65,16 +65,16 @@ echo.
 
 ::prepend symbols-define lines (from Windows-SDK).
 echo DEBUG:  adding DIALOG-related symbol-define-lines from Windows-SDK to the head of the RC file.
-type "defines.rc"             >%FILE_RC%
+type %TOOL_DEFINES%            >%FILE_RC%
 type %FILE_TEMP%              >>%FILE_RC%
-del /f /q %FILE_TEMP%         2>nul >nul
+del /f /q %FILE_TEMP%         
 echo done.
 echo.
 
 
 ::compile filename.rc to filename.res (on errors add missing define lines to defines.rc)
 echo DEBUG:  compile RC to RES ^(using Microsoft Resource Compiler - rc.exe^).
-call %TOOL_RC% %FILE_RC%  2>nul >nul
+call %TOOL_RC% %FILE_RC%  
 if not exist %FILE_RES%   goto NORES
 echo done.
 echo.
@@ -148,5 +148,5 @@ goto EXIT
   echo.
   echo ^(Press any key to quit...^)
   echo.
-  pause 2>nul >nul
+  pause 
 
